@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Blogs;
 
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class PostBlogRequest extends Request
+class PostBlogRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,16 +31,16 @@ class PostBlogRequest extends Request
             ],
             'content' => [
                 'required',
-                'string'
+                'string',
             ],
             'file' => [
                 'nullable',
                 'mimes:jpg,bmp,png',
-                'max:5000'
+                'max:5000',
             ],
             'type' => [
                 'required',
-                'in:Government,Foods,Sport,Places'
+                Rule::in(['Government', 'Food', 'Sports', 'Places']),
             ],
         ];
     }
