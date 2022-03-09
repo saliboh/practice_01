@@ -6,13 +6,13 @@
         </button>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}?filter=government">Government</a>
+                <a class="nav-link" href="{{ route('home') }}?filter=Government">Government</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}?filter=sports">Sports</a>
+                <a class="nav-link" href="{{ route('home') }}?filter=Sports">Sports</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}?filter=food">Food</a>
+                <a class="nav-link" href="{{ route('home') }}?filter=Food">Food</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link btn btn-success" href="{{ route('blog.create') }}">Create</a>

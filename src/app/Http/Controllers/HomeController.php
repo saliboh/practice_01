@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        return view('home')->with('blogs', []);
+        $blogs = Blog::query()
+            ->when(isset($request->filter), function ($query) use ($request) {
+                $query->where('type', $request->filter);
+            })
+            ->get();
+
+        return view('home')->with('blogs', $blogs);
     }
 }
