@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function(){
+    return redirect()->route('home');
 });
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/blogs/create', [BlogController::class, 'index'])->name('blog.create');
+Route::post('/blogs/create', [BlogController::class, 'store'])->name('blog.store');
