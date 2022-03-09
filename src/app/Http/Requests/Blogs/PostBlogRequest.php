@@ -36,7 +36,7 @@ class PostBlogRequest extends FormRequest
             'file' => [
                 'nullable',
                 'mimes:jpg,bmp,png',
-                'max:5000',
+                'max:40240',
             ],
             'type' => [
                 'required',

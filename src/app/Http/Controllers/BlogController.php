@@ -25,15 +25,33 @@ class BlogController extends Controller
     public function store(PostBlogRequest $request)
     {
         //TODO: Can be refactored to use service / repo
-        $validatedRequest = $request->validated();
 
         $blog = new Blog();
-        $blog->title = $validatedRequest['title'];
-        $blog->content = $validatedRequest['content'];
-        $blog->filename = $validatedRequest['filename'] ?? '';
-        $blog->type = $validatedRequest['type'];
+        $blog->title = $request->title;
+        $blog->content = $request->content;
+        $blog->type = $request->type;
+        $blog->filename = $this->handleFileUpload($request);
         $blog->save();
 
         return redirect()->route('home');
+    }
+
+    /**
+     * Handles File Upload
+     *
+     * @return string
+     */
+    protected function handleFileUpload(PostBlogRequest $request)
+    {
+        if($request->hasFile('file')){
+            $filenameWithExt = $request->file('file')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('file')->getClientOriginalExtension();
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+
+            $request->file('file')->storeAs('public/images', $fileNameToStore);
+
+            return $fileNameToStore;
+        }
     }
 }
