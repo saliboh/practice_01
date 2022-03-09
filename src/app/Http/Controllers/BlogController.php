@@ -24,7 +24,7 @@ class BlogController extends Controller
      */
     public function store(PostBlogRequest $request)
     {
-        //NOTE: Can be refactored to use service / repo
+        //TODO: Can be refactored to use service / repo
         $validatedRequest = $request->validated();
 
         $blog = new Blog();
